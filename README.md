@@ -22,7 +22,7 @@ To compile the binary from the source, you will need [Rust and Cargo](https://ru
 We have provided a streamlined build script that compiles the project in optimized release mode and extracts the binary for immediate use:
 
 ```bash
-git clone [https://github.com/yourusername/log_rotator.git](https://github.com/yourusername/log_rotator.git)
+git clone [https://github.com/yourusername/logmill.git](https://github.com/yourusername/logmill.git)
 cd log_rotator
 chmod +x build.sh
 ./build.sh
@@ -34,16 +34,16 @@ Because this acts as a proxy utility, you simply pipe (|) the output of your app
 
 ```bash
 # Basic usage (defaults to 1MB rotation on app.log)
-node my_server.js | log_rotator
+node my_server.js | logmill
 
 # Advanced usage with custom sizes and an archive directory
-python3 my_app.py | log_rotator --file /var/log/my_app.log --max-size 10M --archive-dir /var/log/archives
+python3 my_app.py | logmill --file /var/log/my_app.log --max-size 10M --archive-dir /var/log/archives
 ```
 
 ### CLI Options
 
 ```
-Usage: log_rotator [OPTIONS]
+Usage: logmill [OPTIONS]
 
 Options:
   -f, --file <FILE>              The path to the active log file [default: app.log]
@@ -69,7 +69,7 @@ User=your_user
 Group=your_group
 
 # Wrap the pipeline in a bash session to evaluate the pipe operator
-ExecStart=/bin/bash -c '/usr/bin/python3 /path/to/your/app.py | /usr/local/bin/log_rotator --file /path/to/logs/app.log --max-size 50M --archive-dir /path/to/logs/archives'
+ExecStart=/bin/bash -c '/usr/bin/python3 /path/to/your/app.py | /usr/local/bin/logmill --file /path/to/logs/app.log --max-size 50M --archive-dir /path/to/logs/archives'
 
 Restart=on-failure
 RestartSec=3
