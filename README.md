@@ -1,10 +1,12 @@
-# LogMill
-
-A lightning-fast, zero-data-loss proxy log rotator built in Rust. 
+<div align="center">
+  <img src="assets/logo.png" alt="Logmill Logo" width="300"/>
+  
+  **A lightning-fast, zero-data-loss proxy log rotator built in Rust.**
+  
+  [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT) [![AUR Package](https://img.shields.io/badge/AUR-logmill--git-1793d1.svg)](https://aur.archlinux.org/) [![Fedora COPR](https://img.shields.io/badge/Fedora-COPR-294172.svg)](https://copr.fedorainfracloud.org/)
+</div>
 
 Designed for DevOps and QA environments, this utility safely captures standard output (`stdout`) from any application, rotates it based on human-readable file sizes, and automatically compresses old logs in a separate background thread.
-
----
 
 ## Key Features
 
@@ -13,7 +15,6 @@ Designed for DevOps and QA environments, this utility safely captures standard o
 *   **Non-Blocking Archiving:** Spawns a dedicated background thread to compress old logs (`.tar.gz`) without slowing down your live application's data stream.
 *   **Human-Readable CLI:** Easily set size thresholds using formats like `500K`, `10M`, or `2G`.
 
----
 ## Installation
 
 To compile the binary from the source, you will need [Rust and Cargo](https://rustup.rs/) installed. 
@@ -27,7 +28,6 @@ chmod +x build.sh
 ./build.sh
 ```
 
----
 ## Quick Start / Usage
 
 Because this acts as a proxy utility, you simply pipe (|) the output of your application directly into the rotator.
@@ -52,7 +52,6 @@ Options:
   -h, --help                     Print help
 ```
 
----
 ## Running as a Background Daemon (systemd)
 
 `LogMill` is designed to be fully compatible with Linux service managers. However, because systemd does not natively interpret the | pipe character, you must wrap your execution pipeline in a bash shell.
@@ -89,8 +88,6 @@ Reload the daemon and start your service:
 sudo systemctl daemon-reload
 sudo systemctl enable --now myapp.service
 ```
-
----
 
 ## Contributing
 
