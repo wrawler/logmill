@@ -30,9 +30,8 @@ else
     exit 1
 fi
 
-# --- NEW: The System-Wide Install Prompt ---
 echo -e "${YELLOW}Would you like to install this system-wide to /usr/local/bin?${NC}"
-echo -e "This allows you to run 'log_rotator' from any directory."
+echo -e "This allows you to run 'logmill' from any directory."
 read -p "Install globally? (requires sudo) [y/N]: " -r
 echo # Move to a new line
 
@@ -40,7 +39,7 @@ if [[ $REPLY =~ ^[Yy]([Ee][Ss])?$ ]]; then
     echo -e "\nRequesting sudo privileges..."
 
     # Copy the binary to the system path
-    sudo cp "./$BINARY_NAME" /usr/local/bin/
+    sudo cp "$TARGET_PATH" "/usr/local/bin/$BINARY_NAME"
     
     # Verify it was placed correctly
     if [ -f "/usr/local/bin/$BINARY_NAME" ]; then

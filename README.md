@@ -10,7 +10,7 @@ Designed for DevOps and QA environments, this utility safely captures standard o
 
 ## Key Features
 
-*   **Zero Data Loss:** Safely intercepts `SIGINT` (Ctrl+C) to ensure memory buffers are flushed to disk before shutting down.
+*   **Graceful Shutdown:** Handles `SIGINT` and `SIGTERM`, drains queued input, flushes the active log, and archives it before shutting down.
 *   **Memory Safe:** Uses bounded `mpsc` channels to strictly cap RAM usage, preventing Out-Of-Memory (OOM) crashes even during heavy disk I/O.
 *   **Non-Blocking Archiving:** Spawns a dedicated background thread to compress old logs (`.tar.gz`) without slowing down your live application's data stream.
 *   **Human-Readable CLI:** Easily set size thresholds using formats like `500K`, `10M`, or `2G`.
@@ -23,7 +23,7 @@ We have provided a streamlined build script that compiles the project in optimiz
 
 ```bash
 git clone [https://github.com/yourusername/logmill.git](https://github.com/yourusername/logmill.git)
-cd log_rotator
+cd logmill
 chmod +x build.sh
 ./build.sh
 ```
@@ -74,7 +74,8 @@ ExecStart=/bin/bash -c '/usr/bin/python3 /path/to/your/app.py | /usr/local/bin/l
 Restart=on-failure
 RestartSec=3
 
-# Ensure graceful shutdown of the Rust daemon
+# Ensure graceful shutdown of the Rust daemon. LogMill handles SIGTERM,
+# drains queued input, and archives the final active log before exiting.
 KillSignal=SIGTERM
 TimeoutStopSec=10
 

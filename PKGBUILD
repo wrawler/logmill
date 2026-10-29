@@ -1,6 +1,6 @@
 # PKGBUILD
 pkgname=logmill-git
-pkgver=1.0.0
+pkgver=0.1.0
 pkgrel=1
 pkgdesc="A zero-loss, memory-safe proxy log rotator built in Rust."
 arch=('x86_64')
